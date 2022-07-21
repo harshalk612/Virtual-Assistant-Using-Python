@@ -1,11 +1,11 @@
 # Importing all Modules one by one
-import pyttsx3 as tts
-import speech_recognition as sr
-import datetime as dt
-import wikipedia as wk
-import webbrowser as wb
-import os as os
-import smtplib as smtp
+import pyttsx3 as tts # For text-to-speech
+import speech_recognition as sr # For Recognizing the user voice
+import datetime as dt # For printing the time
+import wikipedia as wk # For Searching on Wikipedia
+import webbrowser as wb # For running web queries within python
+import os as os # For accessing the system directories
+import smtplib as smtp # For accessing smtp server of gmail
 
 # Initializing the voice engine
 engine = tts.init("sapi5")

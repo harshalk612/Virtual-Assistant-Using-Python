@@ -99,7 +99,7 @@ if __name__ == "__main__":
             wb.open_new_tab("http://www.stackoverflow.com")
 
         elif "open netflix" in query:
-            speak("Opening Stackoverflow...")
+            speak("Opening Netflix")
             wb.open_new_tab("http://www.netflix.com")
 
         elif "open github" in query:

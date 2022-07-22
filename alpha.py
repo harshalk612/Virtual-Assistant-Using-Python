@@ -1,11 +1,11 @@
 # Importing all Modules one by one
-import pyttsx3 as tts # For text-to-speech
-import speech_recognition as sr # For Recognizing the user voice
-import datetime as dt # For printing the time
-import wikipedia as wk # For Searching on Wikipedia
-import webbrowser as wb # For running web queries within python
-import os as os # For accessing the system directories
-import smtplib as smtp # For accessing smtp server of gmail
+import pyttsx3 as tts  # For text-to-speech
+import speech_recognition as sr  # For Recognizing the user voice
+import datetime as dt  # For printing the time
+import wikipedia as wk  # For Searching on Wikipedia
+import webbrowser as wb  # For running web queries within python
+import os as os  # For accessing the system directories
+import smtplib as smtp  # For accessing smtp server of gmail
 
 # Initializing the voice engine
 engine = tts.init("sapi5")
@@ -99,7 +99,7 @@ if __name__ == "__main__":
             wb.open_new_tab("http://www.stackoverflow.com")
 
         elif "open netflix" in query:
-            speak("Opening Stackoverflow...")
+            speak("Opening Netflix...")
             wb.open_new_tab("http://www.netflix.com")
 
         elif "open github" in query:

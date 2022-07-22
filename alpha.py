@@ -94,10 +94,6 @@ if __name__ == "__main__":
             speak("Opening Google...")
             wb.open_new_tab("http://www.google.com")
 
-        elif "open stackoverflow" in query:
-            speak("Opening Stackoverflow...")
-            wb.open_new_tab("http://www.stackoverflow.com")
-
         elif "open netflix" in query:
             speak("Opening Netflix...")
             wb.open_new_tab("http://www.netflix.com")
@@ -142,6 +138,10 @@ if __name__ == "__main__":
         # For Shutting Down Alpha
         elif "shutdown" in query:
             speak("Shutting Down sir,Have a Good Day !")
+            exit()
+
+        elif "quit" in query:
+            speak("Quitting sir,Have a Good Day !")
             exit()
 
         # Sending Email Query

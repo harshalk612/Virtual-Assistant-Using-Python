@@ -131,10 +131,8 @@ if __name__ == "__main__":
 
         # VS Code Startup Query
         elif "open vs code" in query:
-            code_path = "C:\\Users\\Harshal\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
-
             speak("Sir, opening vs code...")
-            os.startfile(code_path)
+            os.system("code")
 
         # Music Play Query
         elif "play songs" in query:

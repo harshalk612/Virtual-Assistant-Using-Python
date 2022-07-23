@@ -56,6 +56,24 @@ def takeCommand():
         return "None"
     return query
 
+# Function to search on Google Anything
+
+
+def googleSearch(topic):  # this will be open in default Browser
+    d = "https://www.google.com/search?q="
+    search_list = topic.split()
+    search_list = search_list[1:len(search_list)-2]
+    topic = "+".join(search_list)
+    os.system("start " + d + str(topic))
+
+def youtubeSearch(topic):  # this will be open in default Browser
+    d = "https://www.youtube.com/results?search_query="
+    search_list = topic.split()
+    search_list = search_list[1:len(search_list)-2]
+    topic = "+".join(search_list)
+    os.system("start " + d + str(topic))
+
+
 # Email Sending Function - sendEmail
 
 
@@ -134,6 +152,22 @@ if __name__ == "__main__":
             song = songs[user_choice-1].replace(".mp3", "")
             print(f"(Now Playing)  {song}")
             os.startfile(os.path.join(music_dir, songs[user_choice-1]))
+
+        # Introduction Query
+
+        elif "who are you" in query:
+            speak("Hii sir, I am Alpha. Speed 1 Terahertz, memory 1 Zegabyte. I am a desktop assistant who can do some mini tasks like playing songs, searching google, youtube and many more. I have been developed by Harshal aka Smashy. You can find me on github at profile @harshal-k612")
+
+        elif "tell me about yourself" in query:
+            speak("Hii sir, I am Alpha. Speed 1 Terahertz, memory 1 Zegabyte. I am a desktop assistant who can do some mini tasks like playing songs, searching google, youtube and many more. I have been developed by Harshal aka Smashy. You can find me on github at profile @harshal-k612")
+
+        # Search Queries
+
+        elif "search" and "google" in query:
+            googleSearch(query)
+
+        elif "search" and "youtube" in query:
+            youtubeSearch(query)
 
         # For Shutting Down Alpha
         elif "shutdown" in query:

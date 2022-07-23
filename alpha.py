@@ -66,6 +66,7 @@ def googleSearch(topic):  # this will be open in default Browser
     topic = "+".join(search_list)
     os.system("start " + d + str(topic))
 
+
 def youtubeSearch(topic):  # this will be open in default Browser
     d = "https://www.youtube.com/results?search_query="
     search_list = topic.split()
@@ -158,6 +159,12 @@ if __name__ == "__main__":
 
         elif "tell me about yourself" in query:
             speak("Hii sir, I am Alpha. Speed 1 Terahertz, memory 1 Zegabyte. I am a desktop assistant who can do some mini tasks like playing songs, searching google, youtube and many more. I have been developed by Harshal aka Smashy. You can find me on github at profile @harshal-k612")
+
+        # Open Query ( Under Developing )
+       
+        elif ("note" in query) or ("notes" in query) or ("notepad" in query) or ("editor" in query):
+            speak("Opening Notepad...")
+            os.system("Notepad")
 
         # Search Queries
 

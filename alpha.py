@@ -34,7 +34,7 @@ def greetMe():
     else:
         speak("Good Evening Sir!")
 
-    speak("Hi sir I\'m Alpha the friendly Assistant. Speed 1 terahertz, memory 1 zigabyte. Version 1 point 0 ")
+    speak("Hi sir I\'m your friendly Assistant Version 1 point 0. Speed 1 terahertz, memory 1 zigabyte. ")
 
 # TakeCommand Function for Taking command from the User
 

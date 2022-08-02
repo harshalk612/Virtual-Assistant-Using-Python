@@ -206,7 +206,7 @@ if __name__ == "__main__":
 
                 speak("What should i say, Sir?")
                 content = takeCommand()
-                to = "harshalkakaiya61@gmail.com"  # Destination Email Address
+                to = "reciever-email-address"  # Destination Email Address
                 sendEmail(to, content)
                 speak("Email has been sent successfully sir")
 

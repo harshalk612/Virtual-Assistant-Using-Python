@@ -7,6 +7,7 @@ import wikipedia as wk  # For Searching on Wikipedia
 import webbrowser as wb  # For running web queries within python
 import os as os  # For accessing the system directories
 import smtplib as smtp  # For accessing smtp server of gmail
+import pyjokes as pyj # For Telling joke to user
 
 # Initializing the voice engine
 engine = tts.init("sapi5")
@@ -41,12 +42,13 @@ def greetMe():
 
 
 def username():
-        speak("What should i call you, sir?")
-        uname = takeCommand()
-        print("#####################")
-        speak(f"Welcome Mr. {uname}")
-        print("#####################")
-        speak("How can i help you, sir?")
+    speak("What should i call you, sir?")
+    uname = takeCommand()
+    print("###############################")
+    speak(f"Welcome Mr. {uname}")
+    print("###############################")
+    print()
+    speak("How can i help you, sir?")
 
     # TakeCommand Function for Taking command from the User
 
@@ -123,23 +125,23 @@ if __name__ == "__main__":
 
         # Internet Queries
         elif "open youtube" in query:
-            speak("Opening Youtube")
+            speak("Here you go to Youtube")
             wb.open_new_tab("http://www.youtube.com")
 
         elif "open google" in query:
-            speak("Opening Google...")
+            speak("Here you go to Google")
             wb.open_new_tab("http://www.google.com")
 
         elif "open netflix" in query:
-            speak("Opening Netflix...")
+            speak("Here you go to Netflix")
             wb.open_new_tab("http://www.netflix.com")
 
         elif "open github" in query:
-            speak("Opening Github...")
+            speak("Here you go to Github")
             wb.open_new_tab("http://www.github.com")
 
         elif "open gmail" in query:
-            speak("Opening Gmail...")
+            speak("Here you go to your Gmail Inbox")
             wb.open_new_tab("http://www.gmail.com")
 
         # Local Time Query
@@ -149,11 +151,13 @@ if __name__ == "__main__":
 
         # VS Code Startup Query
         elif "open vs code" in query:
-            speak("Sir, opening vs code...")
+            speak("Here you go to Visual Studio Code. Happy Coding")
             os.system("code")
 
         # Music Play Query
-        elif "play songs" in query:
+        elif ("play songs" in query) or ("play song" in query) or ("play music" in query):
+            speak("Here You go with music:")
+            print()
             music_dir = "F:\\Favourite Songs"
             songs = os.listdir(music_dir)
             print("Available Songs are below : ")
@@ -172,10 +176,10 @@ if __name__ == "__main__":
         # Introduction Query
 
         elif "who are you" in query:
-            speak("Hii sir, I am Alpha. Speed 1 Terahertz, memory 1 Zegabyte. I am a desktop assistant who can do some mini tasks like playing songs, searching google, youtube and many more. I have been developed by Harshal aka Smashy. You can find me on github at profile @harshal-k612")
+            speak("Hii sir, I am Alpha 1 point o. I am a virtual assistant who can do some mini tasks like playing songs, sending email, searching google, youtube, wikipedia and many more. I have been created by Harshal using core python. You can find me on github at profile @harshal-k612")
 
         elif "tell me about yourself" in query:
-            speak("Hii sir, I am Alpha. Speed 1 Terahertz, memory 1 Zegabyte. I am a desktop assistant who can do some mini tasks like playing songs, searching google, youtube and many more. I have been developed by Harshal aka Smashy. You can find me on github at profile @harshal-k612")
+            speak("Hii sir, I am Alpha 1 point o. I am a virtual assistant who can do some mini tasks like playing songs, sending email, searching google, youtube, wikipedia and many more. I have been created by Harshal using core python. You can find me on github at profile @harshal-k612")
 
         # Open Query ( Under Developing )
 
@@ -192,7 +196,7 @@ if __name__ == "__main__":
             youtubeSearch(query)
 
         # For Shutting Down Alpha
-        elif "shutdown" in query:
+        elif ("shutdown" in query) or ("shut down" in query):
             speak("Shutting Down sir,Have a Good Day !")
             exit()
 
@@ -200,19 +204,68 @@ if __name__ == "__main__":
             speak("Quitting sir,Have a Good Day !")
             exit()
 
-        # Sending Email Query
-        elif "send email to harshal" in query:
+        # Sending Email Query only for harshal
+        elif ("send email to harshal" in query) or ("send mail to harshal" in query):
             try:
 
                 speak("What should i say, Sir?")
                 content = takeCommand()
-                to = "reciever-email-address"  # Destination Email Address
+                to = "harshalkakaiya61@gmail.com"  # My Email Address
                 sendEmail(to, content)
                 speak("Email has been sent successfully sir")
 
             except Exception as e:
                 speak("Sorry Sir.I am not able to send this email this moment")
 
+        # General Email Sending Query
+        elif ("send email" in query) or ("send mail" in query):
+            try:
+
+                speak("What should i say, Sir?")
+                content = takeCommand()
+                speak("Whome should i send the mail?")
+                to = input()  # Destination Email Address
+                sendEmail(to, content)
+                speak("Email has been sent successfully sir")
+
+            except Exception as e:
+                speak("Sorry Sir.I am not able to send this email this moment")
+
+        # Interaction Queries
+        elif 'how are you' in query:
+            speak("I am fine, Thank you")
+            speak("How are you, Sir")
+
+        elif 'fine' in query or "good" in query:
+            speak("It's good to know that your fine")
+
+        # Name Query
+        elif "what's your name" in query or "What is your name" in query:
+            speak("My friends call me Alpha")
+
+        # Creator Query 
+
+        elif "who made you" in query or "who created you" in query:
+            speak("I have been created by Harshal.")
+        
+        # Joke Query
+        elif 'joke' in query:
+            speak(pyj.get_joke())
+
+        # Some Other Queries for Fun XD
+
+        elif "who i am" in query:
+            speak("If you talk then definitely your human X D.")
+
+        elif "why you came to world" in query:
+            speak("Thanks to Harshal. further It's a secret")
+
+        elif "who are you" in query:
+            speak("I am your virtual assistant created by Harshal")
+
+        elif 'reason for you' in query:
+            speak("I was created as a Minor project by Mister Harshal ")
+        
         # When no query runs
         else:
             speak("Nothing Happens Sir...Please Try Again")

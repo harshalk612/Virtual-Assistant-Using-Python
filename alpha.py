@@ -1,4 +1,5 @@
 # Importing all Modules one by one
+import shutil
 import pyttsx3 as tts  # For text-to-speech
 import speech_recognition as sr  # For Recognizing the user voice
 import datetime as dt  # For printing the time
@@ -34,9 +35,20 @@ def greetMe():
     else:
         speak("Good Evening Sir!")
 
-    speak("Hi sir I\'m your friendly Assistant Version 1 point 0. Speed 1 terahertz, memory 1 zigabyte. ")
+    speak("Hi sir I\'m Alpha 1 point o, the friendly assistant. Speed 1 terahertz, memory 1 zigabyte. ")
 
-# TakeCommand Function for Taking command from the User
+# Username Function for Deciding name for the user
+
+
+def username():
+        speak("What should i call you, sir?")
+        uname = takeCommand()
+        print("#####################")
+        speak(f"Welcome Mr. {uname}")
+        print("#####################")
+        speak("How can i help you, sir?")
+
+    # TakeCommand Function for Taking command from the User
 
 
 def takeCommand():
@@ -89,7 +101,11 @@ def sendEmail(to, content):
 
 # Main Method of the Program
 if __name__ == "__main__":
+    def clear(): return os.system("cls")  # Clear Any Command Before
+
+    clear()
     greetMe()
+    username()
 
     while True:
         query = takeCommand().lower()
@@ -161,7 +177,7 @@ if __name__ == "__main__":
             speak("Hii sir, I am Alpha. Speed 1 Terahertz, memory 1 Zegabyte. I am a desktop assistant who can do some mini tasks like playing songs, searching google, youtube and many more. I have been developed by Harshal aka Smashy. You can find me on github at profile @harshal-k612")
 
         # Open Query ( Under Developing )
-       
+
         elif ("note" in query) or ("notes" in query) or ("notepad" in query) or ("editor" in query):
             speak("Opening Notepad...")
             os.system("Notepad")

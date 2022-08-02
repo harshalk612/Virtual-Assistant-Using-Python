@@ -1,5 +1,7 @@
 # Importing all Modules one by one
-import shutil
+
+import time as time  # For Time Functions like sleep
+import ctypes as ct  # For locking workstation
 import pyttsx3 as tts  # For text-to-speech
 import speech_recognition as sr  # For Recognizing the user voice
 import datetime as dt  # For printing the time
@@ -7,7 +9,11 @@ import wikipedia as wk  # For Searching on Wikipedia
 import webbrowser as wb  # For running web queries within python
 import os as os  # For accessing the system directories
 import smtplib as smtp  # For accessing smtp server of gmail
-import pyjokes as pyj # For Telling joke to user
+import pyjokes as pyj  # For Telling joke to user
+import subprocess as sp  # For Doing Some Tasks
+import winshell as ws # For Some Tasks
+import ecapture as ec # For Capturing the Photo
+
 
 # Initializing the voice engine
 engine = tts.init("sapi5")
@@ -15,16 +21,12 @@ voices = engine.getProperty("voices")
 engine.setProperty("voice", voices[0].id)
 
 # Function Speak for Speaking
-
-
 def speak(audio):
     engine.say(audio)
     print("Alpha:", audio)
     engine.runAndWait()
 
 # WishMe Function for Greeting the User
-
-
 def greetMe():
     hour = dt.datetime.now().hour
     if hour >= 0 and hour < 12:
@@ -38,9 +40,7 @@ def greetMe():
 
     speak("Hi sir I\'m Alpha 1 point o, the friendly assistant. Speed 1 terahertz, memory 1 zigabyte. ")
 
-# Username Function for Deciding name for the user
-
-
+# Username Function for Deciding name for the userdef username():
 def username():
     speak("What should i call you, sir?")
     uname = takeCommand()
@@ -50,9 +50,7 @@ def username():
     print()
     speak("How can i help you, sir?")
 
-    # TakeCommand Function for Taking command from the User
-
-
+# TakeCommand Function for Taking command from the User
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -71,8 +69,6 @@ def takeCommand():
     return query
 
 # Function to search on Google Anything
-
-
 def googleSearch(topic):  # this will be open in default Browser
     d = "https://www.google.com/search?q="
     search_list = topic.split()
@@ -80,7 +76,7 @@ def googleSearch(topic):  # this will be open in default Browser
     topic = "+".join(search_list)
     os.system("start " + d + str(topic))
 
-
+# Function to search on Youtube Anything
 def youtubeSearch(topic):  # this will be open in default Browser
     d = "https://www.youtube.com/results?search_query="
     search_list = topic.split()
@@ -90,8 +86,6 @@ def youtubeSearch(topic):  # this will be open in default Browser
 
 
 # Email Sending Function - sendEmail
-
-
 def sendEmail(to, content):
     server = smtp.SMTP("smtp.gmail.com", 587)
     server.ehlo()
@@ -174,34 +168,24 @@ if __name__ == "__main__":
             os.startfile(os.path.join(music_dir, songs[user_choice-1]))
 
         # Introduction Query
-
-        elif "who are you" in query:
-            speak("Hii sir, I am Alpha 1 point o. I am a virtual assistant who can do some mini tasks like playing songs, sending email, searching google, youtube, wikipedia and many more. I have been created by Harshal using core python. You can find me on github at profile @harshal-k612")
-
         elif "tell me about yourself" in query:
             speak("Hii sir, I am Alpha 1 point o. I am a virtual assistant who can do some mini tasks like playing songs, sending email, searching google, youtube, wikipedia and many more. I have been created by Harshal using core python. You can find me on github at profile @harshal-k612")
 
         # Open Query ( Under Developing )
-
         elif ("note" in query) or ("notes" in query) or ("notepad" in query) or ("editor" in query):
             speak("Opening Notepad...")
             os.system("Notepad")
 
         # Search Queries
-
         elif "search" and "google" in query:
             googleSearch(query)
 
         elif "search" and "youtube" in query:
             youtubeSearch(query)
 
-        # For Shutting Down Alpha
-        elif ("shutdown" in query) or ("shut down" in query):
-            speak("Shutting Down sir,Have a Good Day !")
-            exit()
-
-        elif "quit" in query:
-            speak("Quitting sir,Have a Good Day !")
+        # For Exiting Alpha
+        elif ("quit" in query) or ("exit" in query):
+            speak("Exiting sir,Have a Good Day !")
             exit()
 
         # Sending Email Query only for harshal
@@ -243,16 +227,77 @@ if __name__ == "__main__":
         elif "what's your name" in query or "What is your name" in query:
             speak("My friends call me Alpha")
 
-        # Creator Query 
-
+        # Creator Query
         elif "who made you" in query or "who created you" in query:
             speak("I have been created by Harshal.")
-        
+
         # Joke Query
         elif 'joke' in query:
             speak(pyj.get_joke())
 
-        # Some Other Queries for Fun XD
+        
+
+        # Locking the Computer
+        elif 'lock' in query:
+            speak("locking the device")
+            ct.windll.user32.LockWorkStation()
+            time.sleep(1)
+
+        # Shutdown the Computer
+        elif ("shutdown" in query) and (("system" in query) or ("computer"in query)):
+            speak("Hold On a Sec ! Your system is on its way to shut down")
+            sp.call('shutdown /p /f')
+
+        # For Emptying the Recycle Bin 
+        elif 'empty recycle bin' in query:
+            ws.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
+            speak("Recycle Bin Recycled")\
+
+        #For Not Listening to Alpha
+        elif "don't listen" in query or "stop listening" in query:
+            speak("for how much time you want to stop alpha from listening commands")
+            a = int(takeCommand())
+            time.sleep(a)
+            print(a)
+
+        #Locating Query
+        elif "where is" in query:
+            query = query.replace("where is", "")
+            location = query
+            speak("User asked to Locate")
+            speak(location)
+            wb.open("https://www.google.nl/maps/place/" + location + "")
+
+        # For Taking a Photo
+        elif "camera" in query or "take a photo" in query:
+            speak("Capturing a Phote..Say Cheese!!")
+            ec.capture(0, "Alpha Camera ", "img.jpg")
+
+        # For Restarting the computer
+        elif "restart" in query:
+            sp.call(["shutdown", "/r"])
+             
+        # For Hibernating the computer
+        elif "hibernate" in query or "sleep" in query:
+            speak("Hibernating")
+            sp.call("shutdown /h")
+
+        # For Logging off the computer
+        elif "log off" in query or "sign out" in query:
+            speak("Make sure all the application are closed before sign-out")
+            time.sleep(5)
+            sp.call(["shutdown", "/l"])
+        
+        # Just for fun
+        elif "alpha" in query:
+            speak("Alpha 1 point o in your service, sir !!")
+            
+        # Most Asked Questions from Google Assistant
+        elif "will you be my gf" in query or "will you be my bf" in query:  
+            speak("I'm not sure about, may be you should give me some time")
+ 
+        elif "i love you" in query:
+            speak("It's hard to understand")
 
         elif "who i am" in query:
             speak("If you talk then definitely your human X D.")
@@ -265,7 +310,7 @@ if __name__ == "__main__":
 
         elif 'reason for you' in query:
             speak("I was created as a Minor project by Mister Harshal ")
-        
+
         # When no query runs
         else:
             speak("Nothing Happens Sir...Please Try Again")

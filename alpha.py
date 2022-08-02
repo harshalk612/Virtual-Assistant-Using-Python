@@ -94,8 +94,9 @@ def sendEmail(to, content):
     server = smtp.SMTP("smtp.gmail.com", 587)
     server.ehlo()
     server.starttls()
+    # Enable Low Secure App Access
     server.login("your-email-address", "your-password")
-    server.sendmail("your-email address", to, content)
+    server.sendmail("your-email-address", to, content)
     server.close()
 
 
@@ -205,7 +206,7 @@ if __name__ == "__main__":
 
                 speak("What should i say, Sir?")
                 content = takeCommand()
-                to = "receiver-email-address"  # Destination Email Address
+                to = "harshalkakaiya61@gmail.com"  # Destination Email Address
                 sendEmail(to, content)
                 speak("Email has been sent successfully sir")
 

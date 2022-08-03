@@ -15,8 +15,8 @@ This Assistant can de mini tasks like:
 7. Sending Mail
 8. User Interaction
 9. Can tell you a joke
-10. Perform Subprocesses like shutting down, restarting, etc.
+10. Perform Subprocesses like shutting down system, restarting system, etc.
 11. Emptying the Recycle Bin
 12. Searching some place on google maps
-13. Taking a E Photo in your system if webcam available
+13. Taking a Photo if webcam or camera available
 14. Some Popular Questions of Google Assistant

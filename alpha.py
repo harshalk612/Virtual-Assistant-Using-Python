@@ -1,4 +1,4 @@
-# Importing all Modules one by one
+# Importing required Modules one by one
 
 import time as time  # For Time Functions like sleep
 import ctypes as ct  # For locking workstation

@@ -223,7 +223,7 @@ if __name__ == "__main__":
                 z = x["weather"]
                 weather_description = z[0]["description"]
                 speak("According to OpenWeather API,")
-                speak(f"Temperature in {city_name} is around {str(current_temperature)} Kelvin, Pressure in {city_name} is around {str(current_pressure)} hecto Pascals, and Humidity in {city_name} is around {str(current_humidiy)} Percentage.")
+                speak(f"Temperature in {city_name} is around {str(current_temperature)} Kelvin, Pressure in {city_name} is around {str(current_pressure)} hecto Pascals, Humidity in {city_name} is around {str(current_humidiy)} Percentage, and Description is {weather_description}.")
                 
              
             else:

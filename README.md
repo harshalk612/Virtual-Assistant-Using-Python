@@ -20,3 +20,4 @@ This Assistant can de mini tasks like:
 12. Searching some place on google maps
 13. Taking a Photo if webcam or camera available
 14. Some Popular Questions of Google Assistant
+15. Knowing the weather of a Particular City 

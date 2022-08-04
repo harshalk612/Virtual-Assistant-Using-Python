@@ -13,6 +13,7 @@ import pyjokes as pyj  # For Telling joke to user
 import subprocess as sp  # For Doing Some Tasks
 import winshell as ws # For Some Tasks
 import ecapture as ec # For Capturing the Photo
+import requests as reqs # For Fetching the API from Browser
 
 
 # Initializing the voice engine
@@ -40,7 +41,7 @@ def greetMe():
 
     speak("Hi sir I\'m Alpha 1 point o, the friendly assistant. Speed 1 terahertz, memory 1 zigabyte. ")
 
-# Username Function for Deciding name for the userdef username():
+# Username Function for Deciding name for the user
 def username():
     speak("What should i call you, sir?")
     uname = takeCommand()
@@ -201,6 +202,33 @@ if __name__ == "__main__":
             except Exception as e:
                 speak("Sorry Sir.I am not able to send this email this moment")
 
+        # Weather Query
+        elif "weather" in query:
+             
+            api_key = "f53e862310035742d40630a15cddc213" # Pls enter your own Api by Open Weather Website
+            base_url = "http://api.openweathermap.org/data/2.5/weather?"
+            speak("What is the City Name ?")
+            city_name = takeCommand()
+            speak("Fetching the data..Please Wait")
+            complete_url = base_url + "appid=" + api_key + "&q=" + city_name
+            response = reqs.get(complete_url)
+            x = response.json()
+            speak("Alright, got it !! ")
+            
+            if x["cod"] != "404":
+                y = x["main"]
+                current_temperature = y["temp"]
+                current_pressure = y["pressure"]
+                current_humidiy = y["humidity"]
+                z = x["weather"]
+                weather_description = z[0]["description"]
+                speak("According to OpenWeather API,")
+                speak(f"Temperature in {city_name} is around {str(current_temperature)} Kelvin, Pressure in {city_name} is around {str(current_pressure)} hecto Pascals, and Humidity in {city_name} is around {str(current_humidiy)} Percentage.")
+                
+             
+            else:
+                speak(" Sorry the City was not Found, Sir !! ")
+
         # General Email Sending Query
         elif ("send email" in query) or ("send mail" in query):
             try:
@@ -235,8 +263,6 @@ if __name__ == "__main__":
         elif 'joke' in query:
             speak(pyj.get_joke())
 
-        
-
         # Locking the Computer
         elif 'lock' in query:
             speak("locking the device")
@@ -249,7 +275,7 @@ if __name__ == "__main__":
             sp.call('shutdown /p /f')
 
         # For Emptying the Recycle Bin 
-        elif 'empty recycle bin' in query:
+        elif ('empty recycle bin' in query) or ("clear recycle bin" in query):
             ws.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
             speak("Recycle Bin Recycled")\
 
@@ -271,7 +297,7 @@ if __name__ == "__main__":
         # For Taking a Photo
         elif "camera" in query or "take a photo" in query:
             speak("Capturing a Phote..Say Cheese!!")
-            ec.capture(0, "Alpha Camera ", "img.jpg")
+            ec.capture(0, "Alpha Camera ", "capture.jpg")
 
         # For Restarting the computer
         elif "restart" in query:

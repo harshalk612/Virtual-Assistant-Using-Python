@@ -21,3 +21,4 @@ This Assistant can de mini tasks like:
 13. Taking a Photo if webcam or camera available
 14. Some Popular Questions of Google Assistant
 15. Knowing the weather of a Particular City 
+16. Knowing the Air Quality Index of a Particular City

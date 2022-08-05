@@ -1,7 +1,8 @@
 # Importing required Modules one by one
 
 import time as time  # For Time Functions like sleep
-import ctypes as ct  # For locking workstation
+import ctypes as ct
+from numpy import take  # For locking workstation
 import pyttsx3 as tts  # For text-to-speech
 import speech_recognition as sr  # For Recognizing the user voice
 import datetime as dt  # For printing the time
@@ -205,12 +206,12 @@ if __name__ == "__main__":
         # Weather Query
         elif "weather" in query:
              
-            api_key = "f53e862310035742d40630a15cddc213" # Pls enter your own Api by Open Weather Website
+            weather_api_key = "f53e862310035742d40630a15cddc213" # Pls enter your own Api by OpenWeather Website
             base_url = "http://api.openweathermap.org/data/2.5/weather?"
             speak("What is the City Name ?")
             city_name = takeCommand()
             speak("Fetching the data..Please Wait")
-            complete_url = base_url + "appid=" + api_key + "&q=" + city_name
+            complete_url = base_url + "appid=" + weather_api_key + "&q=" + city_name
             response = reqs.get(complete_url)
             x = response.json()
             speak("Alright, got it !! ")
@@ -227,8 +228,35 @@ if __name__ == "__main__":
                 
              
             else:
-                speak(" Sorry the City was not Found, Sir !! ")
+                speak(" Something went Wrong,Sir!!")
 
+        # Air Quality Index
+        elif ("air quality index" in query) or ("quality of air" in query) or ("air quality" in query):
+            api_token = "c5f03e9a-59e5-4274-85a2-cfb8ff82300f" # Get Own Api Token From IQAir Website
+            speak("What is the City Name ? ")
+            city_name = takeCommand()
+            speak("What is the State Name ?")
+            state_name = takeCommand()
+            speak("What is the Country Name ?")
+            country_name = takeCommand()
+            speak("Fetching the Data.. Please Wait")
+            data = reqs.get(f"https://api.airvisual.com/v2/city?city={city_name}&state={state_name}&country={country_name}&key={api_token}")
+            y = data.json()
+            speak("Alright, got it !!")
+
+            if y["status"] == "success":
+                current_data = y["data"]
+                current_stats = current_data["current"]
+                pollution_stats = current_stats["pollution"]
+                current_aqi = pollution_stats["aqius"]
+                print()
+                speak("According to IQAir API,")
+                speak(f"The Current Air Quality index of {city_name} is around {current_aqi}")
+            else:
+                speak("Something went Wrong Sir !! ")
+            
+
+            
         # General Email Sending Query
         elif ("send email" in query) or ("send mail" in query):
             try:
@@ -275,7 +303,7 @@ if __name__ == "__main__":
             sp.call('shutdown /p /f')
 
         # For Emptying the Recycle Bin 
-        elif ('empty recycle bin' in query) or ("clear recycle bin" in query):
+        elif ("recycle bin" in query):
             ws.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
             speak("Recycle Bin Recycled")\
 

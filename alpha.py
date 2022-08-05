@@ -206,7 +206,7 @@ if __name__ == "__main__":
         # Weather Query
         elif "weather" in query:
              
-            weather_api_key = "f53e862310035742d40630a15cddc213" # Pls enter your own Api by OpenWeather Website
+            weather_api_key = "your-api-key" # Pls enter your own Api by OpenWeather Website
             base_url = "http://api.openweathermap.org/data/2.5/weather?"
             speak("What is the City Name ?")
             city_name = takeCommand()
@@ -232,7 +232,7 @@ if __name__ == "__main__":
 
         # Air Quality Index
         elif ("air quality index" in query) or ("quality of air" in query) or ("air quality" in query):
-            api_token = "c5f03e9a-59e5-4274-85a2-cfb8ff82300f" # Get Own Api Token From IQAir Website
+            api_token = "your-api-token" # Get Own Api Token From IQAir Website
             speak("What is the City Name ? ")
             city_name = takeCommand()
             speak("What is the State Name ?")

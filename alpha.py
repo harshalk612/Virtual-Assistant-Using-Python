@@ -1,8 +1,7 @@
 # Importing required Modules one by one
 
 import time as time  # For Time Functions like sleep
-import ctypes as ct
-from numpy import take  # For locking workstation
+import ctypes as ct # For locking workstation
 import pyttsx3 as tts  # For text-to-speech
 import speech_recognition as sr  # For Recognizing the user voice
 import datetime as dt  # For printing the time

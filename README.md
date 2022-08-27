@@ -22,3 +22,6 @@ This Assistant can de mini tasks like:
 14. Some Popular Questions of Google Assistant
 15. Knowing the weather of a Particular City 
 16. Knowing the Air Quality Index of a Particular City
+17. Playing a Song On Youtube
+18. Send a Whatsapp Message at Particular Time
+19. Find IP Address of System and location of your system

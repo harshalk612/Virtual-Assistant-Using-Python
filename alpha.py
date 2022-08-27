@@ -11,7 +11,8 @@ import os as os  # For accessing the system directories
 import smtplib as smtp  # For accessing smtp server of gmail
 import pyjokes as pyj  # For Telling joke to user
 import subprocess as sp  # For Doing Some Tasks
-import winshell as ws # For Some Tasks
+import winshell as ws # For Some Task
+import pywhatkit 
 import ecapture as ec # For Capturing the Photo
 import requests as reqs # For Fetching the API from Browser
 
@@ -26,6 +27,24 @@ def speak(audio):
     engine.say(audio)
     print("Alpha:", audio)
     engine.runAndWait()
+
+# TakeCommand Function for Taking command from the User
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("\nListening...")
+        r.pause_threshold = 1
+        audio = r.listen(source,phrase_time_limit=5)
+
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language="en-in")
+        print(f"User Said: {query}\n")
+
+    except Exception as e:
+        print("Please say that again...")
+        return "None"
+    return query
 
 # WishMe Function for Greeting the User
 def greetMe():
@@ -51,52 +70,6 @@ def username():
     print()
     speak("How can i help you, sir?")
 
-# TakeCommand Function for Taking command from the User
-def takeCommand():
-    r = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("\nListening...")
-        r.pause_threshold = 1
-        audio = r.listen(source)
-
-    try:
-        print("Recognizing...")
-        query = r.recognize_google(audio, language="en-in")
-        print(f"User Said: {query}\n")
-
-    except Exception as e:
-        print("Please say that again...")
-        return "None"
-    return query
-
-# Function to search on Google Anything
-def googleSearch(topic):  # this will be open in default Browser
-    d = "https://www.google.com/search?q="
-    search_list = topic.split()
-    search_list = search_list[1:len(search_list)-2]
-    topic = "+".join(search_list)
-    os.system("start " + d + str(topic))
-
-# Function to search on Youtube Anything
-def youtubeSearch(topic):  # this will be open in default Browser
-    d = "https://www.youtube.com/results?search_query="
-    search_list = topic.split()
-    search_list = search_list[1:len(search_list)-2]
-    topic = "+".join(search_list)
-    os.system("start " + d + str(topic))
-
-
-# Email Sending Function - sendEmail
-def sendEmail(to, content):
-    server = smtp.SMTP("smtp.gmail.com", 587)
-    server.ehlo()
-    server.starttls()
-    # Enable Low Secure App Access
-    server.login("your-email-address", "your-password")
-    server.sendmail("your-email-address", to, content)
-    server.close()
-
-
 # Main Method of the Program
 if __name__ == "__main__":
     def clear(): return os.system("cls")  # Clear Any Command Before
@@ -117,6 +90,36 @@ if __name__ == "__main__":
             speak("Alright!")
             speak("According to Wikipedia-")
             speak(results)
+
+        # To find my location using IP Address
+        elif "where i am" in query or "where we are" in query:
+            speak("wait sir, let me check")
+            try:
+                ipAdd = reqs.get('https://api.ipify.org').text
+                # print(ipAdd)
+                url = 'https://get.geojs.io/v1/ip/geo/'+ipAdd+'.json'
+                geo_requests = reqs.get(url)
+                geo_data = geo_requests.json()
+                # print(geo_data)
+                city= geo_data['city']
+                # state = geo_data['state']
+                country = geo_data['country']
+                speak(f"sir i am not sure, but i think we are in {city} city of {country} country")
+            except Exception as e:
+                speak("sorry sir, Due to network issue i am not able to find where we are.")
+                pass
+
+        elif "play song on youtube" in query:
+            speak("What Song You want to Play sir ? : ")
+            song = takeCommand()
+            speak(f"Playing {song} on Youtube... ")
+            pywhatkit.playonyt(song)
+        
+        
+        # Open Command Prompt 
+        elif "open command prompt" in query:
+            speak("Here you go to Command Prompt")
+            os.system("start cmd")
 
         # Internet Queries
         elif "open youtube" in query:
@@ -143,6 +146,7 @@ if __name__ == "__main__":
         elif "the time" in query:
             strTime = dt.datetime.now().strftime("%H:%M:%S")
             speak(f"Sir, the time is - {strTime}")
+        
 
         # VS Code Startup Query
         elif "open vs code" in query:
@@ -179,15 +183,54 @@ if __name__ == "__main__":
 
         # Search Queries
         elif "search" and "google" in query:
-            googleSearch(query)
+            d = "https://www.google.com/search?q="
+            search_list = query.split()
+            search_list = search_list[1:len(search_list)-2]
+            topic = "+".join(search_list)
+            os.system("start " + d + str(topic))
 
         elif "search" and "youtube" in query:
-            youtubeSearch(query)
+            d = "https://www.youtube.com/results?search_query="
+            search_list = query.split()
+            search_list = search_list[1:len(search_list)-2]
+            topic = "+".join(search_list)
+            os.system("start " + d + str(topic))
 
         # For Exiting Alpha
         elif ("quit" in query) or ("exit" in query):
             speak("Exiting sir,Have a Good Day !")
             exit()
+
+        # To find my location using IP Address
+        elif "where i am" in query or "where we are" in query:
+            speak("wait sir, let me check")
+            try:
+                ipAdd = reqs.get('https://api.ipify.org').text
+                # print(ipAdd)
+                url = 'https://get.geojs.io/v1/ip/geo/'+ipAdd+'.json'
+                geo_requests = reqs.get(url)
+                geo_data = geo_requests.json()
+                # print(geo_data)
+                city = geo_data['city']
+                # state = geo_data['state']
+                country = geo_data['country']
+                speak(
+                     f"sir i am not sure, but i think we are in {city} city of {country} country")
+            except Exception as e:
+                speak("sorry sir, Due to network issue i am not able to find where we are.")
+                pass
+
+        elif "whatsapp" in query:
+            speak("Please Enter the Number u want to send Message with Country Code")
+            number = input("Number: 3")
+            speak("What you want to send as a Message ?")
+            message = takeCommand()
+            speak("At What Time you want to send message")
+            time = input("Time with 24 Hour Format and Minimum time should be 1 minute")
+            time_list = time.split(":")
+            time_hour = int(time_list[0])
+            time_min = int(time_list[1])
+            pywhatkit.sendwhatmsg(number,message=message,time_hour=time_hour,time_min=time_min)
 
         # Sending Email Query only for harshal
         elif ("send email to harshal" in query) or ("send mail to harshal" in query):
@@ -196,11 +239,21 @@ if __name__ == "__main__":
                 speak("What should i say, Sir?")
                 content = takeCommand()
                 to = "harshalkakaiya61@gmail.com"  # My Email Address
-                sendEmail(to, content)
+                server = smtp.SMTP("smtp.gmail.com", 587)
+                server.ehlo()
+                server.starttls()
+                # Enable Low Secure App Access
+                server.login("your-email-address", "your-password")
+                server.sendmail("your-email-address", to, content)
+                server.close()
                 speak("Email has been sent successfully sir")
 
             except Exception as e:
                 speak("Sorry Sir.I am not able to send this email this moment")
+
+        elif "ip address" in query:
+            ip = reqs.get("https://api.ipify.org").text
+            speak(f"Your IP Address is {ip}")
 
         # Weather Query
         elif "weather" in query:
@@ -264,7 +317,13 @@ if __name__ == "__main__":
                 content = takeCommand()
                 speak("Whome should i send the mail?")
                 to = input()  # Destination Email Address
-                sendEmail(to, content)
+                server = smtp.SMTP("smtp.gmail.com", 587)
+                server.ehlo()
+                server.starttls()
+                # Enable Low Secure App Access
+                server.login("your-email-address", "your-password")
+                server.sendmail("your-email-address", to, content)
+                server.close()
                 speak("Email has been sent successfully sir")
 
             except Exception as e:

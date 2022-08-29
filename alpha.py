@@ -12,7 +12,7 @@ import smtplib as smtp  # For accessing smtp server of gmail
 import pyjokes as pyj  # For Telling joke to user
 import subprocess as sp  # For Doing Some Tasks
 import winshell as ws # For Some Task
-import pywhatkit 
+import pywhatkit # For Some Additional Tasks
 import ecapture as ec # For Capturing the Photo
 import requests as reqs # For Fetching the API from Browser
 
@@ -71,7 +71,7 @@ def username():
     speak("How can i help you, sir?")
 
 # Main Method of the Program
-if __name__ == "__main__":
+def taskExecution():
     def clear(): return os.system("cls")  # Clear Any Command Before
 
     clear()
@@ -243,8 +243,8 @@ if __name__ == "__main__":
                 server.ehlo()
                 server.starttls()
                 # Enable Low Secure App Access
-                server.login("your-email-address", "your-password")
-                server.sendmail("your-email-address", to, content)
+                server.login("190420116028.it19@scet.ac.in", "Foram@181004")
+                server.sendmail("190420116028.it19@scet.ac.in", to, content)
                 server.close()
                 speak("Email has been sent successfully sir")
 
@@ -426,3 +426,5 @@ if __name__ == "__main__":
         # When no query runs
         else:
             speak("Nothing Happens Sir...Please Try Again")
+
+taskExecution()

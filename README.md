@@ -2,7 +2,7 @@
 
 Alpha is a Virtual Assistant which was developed using Core Python.
 
-Imported Modules which are used in this Project are : time, ctypes, pyttsx3, speech_recognition, datetime, wikipedia, webbrowser, os, smtplib, pyjokes, subprocess, winshell, ecapture
+Imported Modules which are used in this Project are : time, ctypes, pyttsx3, speech_recognition, datetime, wikipedia, webbrowser, os, smtplib, pyjokes, subprocess, winshell, ecapture,pywhatkit
 
 This Assistant can de mini tasks like:
 

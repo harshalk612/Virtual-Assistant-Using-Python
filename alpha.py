@@ -1,5 +1,6 @@
 # Importing required Modules one by one
 
+import imp
 import time as time  # For Time Functions like sleep
 import ctypes as ct # For locking workstation
 import pyttsx3 as tts  # For text-to-speech
@@ -15,6 +16,7 @@ import winshell as ws # For Some Task
 import pywhatkit # For Some Additional Tasks
 import ecapture as ec # For Capturing the Photo
 import requests as reqs # For Fetching the API from Browser
+from AppOpener import run # For Opening App
 
 
 # Initializing the voice engine
@@ -220,13 +222,15 @@ def taskExecution():
                 speak("sorry sir, Due to network issue i am not able to find where we are.")
                 pass
 
+        
+
         elif "whatsapp" in query:
-            speak("Please Enter the Number u want to send Message with Country Code")
-            number = input("Number: 3")
+            speak("Please Enter the Number u want to send Message with Country Code: ")
+            number = input("Number: ")
             speak("What you want to send as a Message ?")
             message = takeCommand()
-            speak("At What Time you want to send message")
-            time = input("Time with 24 Hour Format and Minimum time should be 1 minute")
+            speak("At What Time you want to send message: ")
+            time = input("Time with 24 Hour Format and Minimum time should be 1 minute: ")
             time_list = time.split(":")
             time_hour = int(time_list[0])
             time_min = int(time_list[1])
@@ -243,8 +247,8 @@ def taskExecution():
                 server.ehlo()
                 server.starttls()
                 # Enable Low Secure App Access
-                server.login("190420116028.it19@scet.ac.in", "Foram@181004")
-                server.sendmail("190420116028.it19@scet.ac.in", to, content)
+                server.login("your-email-address", "your-password")
+                server.sendmail("your-email-address", to, content)
                 server.close()
                 speak("Email has been sent successfully sir")
 
@@ -254,6 +258,11 @@ def taskExecution():
         elif "ip address" in query:
             ip = reqs.get("https://api.ipify.org").text
             speak(f"Your IP Address is {ip}")
+
+        elif "app" in query:
+            speak("what is the app name : ")
+            appname = takeCommand().lower()
+            run(appname)
 
         # Weather Query
         elif "weather" in query:

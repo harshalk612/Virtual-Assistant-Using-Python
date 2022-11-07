@@ -1,6 +1,6 @@
 # ProjectAlpha
 
-A Personal Desktop Assistant named ALPHA which can do various mini tasks just by giving voice commands using Python.
+A Personal Desktop Assistant named as ALPHA which can do various mini tasks just by giving voice commands using Python.
 
 Imported Modules which are used in this Project are : time, ctypes, pyttsx3, speech_recognition, datetime, wikipedia, webbrowser, os, smtplib, pyjokes, subprocess, winshell, ecapture,pywhatkit
 

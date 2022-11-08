@@ -231,7 +231,7 @@ def taskExecution():
             speak("At What Time you want to send message: ")
             time_wp = input("Time with 24 Hour Format and Minimum time should be 1 minute: ")
             time_list = time_wp.split(":")
-            time_hour = int(time_list[0])f
+            time_hour = int(time_list[0])
             time_min = int(time_list[1])
             pywhatkit.sendwhatmsg(number,message=message,time_hour=time_hour,time_min=time_min)
 

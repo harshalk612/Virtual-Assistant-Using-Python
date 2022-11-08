@@ -1,7 +1,6 @@
 # Importing required Modules one by one
 
-import imp
-import time as time  # For Time Functions like sleep
+import time  # For Time Functions like sleep
 import ctypes as ct # For locking workstation
 import pyttsx3 as tts  # For text-to-speech
 import speech_recognition as sr  # For Recognizing the user voice
@@ -59,7 +58,7 @@ def greetMe():
 
     else:
         speak("Good Evening Sir!")
-
+    
     speak("Hi sir I\'m Alpha 1 point o, the friendly assistant. Speed 1 terahertz, memory 1 zigabyte. ")
 
 # Username Function for Deciding name for the user
@@ -111,7 +110,7 @@ def taskExecution():
                 speak("sorry sir, Due to network issue i am not able to find where we are.")
                 pass
 
-        elif "play song on youtube" in query:
+        elif "song" and "youtube" in query:
             speak("What Song You want to Play sir ? : ")
             song = takeCommand()
             speak(f"Playing {song} on Youtube... ")
@@ -230,9 +229,9 @@ def taskExecution():
             speak("What you want to send as a Message ?")
             message = takeCommand()
             speak("At What Time you want to send message: ")
-            time = input("Time with 24 Hour Format and Minimum time should be 1 minute: ")
-            time_list = time.split(":")
-            time_hour = int(time_list[0])
+            time_wp = input("Time with 24 Hour Format and Minimum time should be 1 minute: ")
+            time_list = time_wp.split(":")
+            time_hour = int(time_list[0])f
             time_min = int(time_list[1])
             pywhatkit.sendwhatmsg(number,message=message,time_hour=time_hour,time_min=time_min)
 
@@ -267,7 +266,7 @@ def taskExecution():
         # Weather Query
         elif "weather" in query:
              
-            weather_api_key = "your-api-key" # Pls enter your own Api by OpenWeather Website
+            weather_api_key = "f53e862310035742d40630a15cddc213" # Pls enter your own Api by OpenWeather Website
             base_url = "http://api.openweathermap.org/data/2.5/weather?"
             speak("What is the City Name ?")
             city_name = takeCommand()
@@ -372,14 +371,16 @@ def taskExecution():
         # For Emptying the Recycle Bin 
         elif ("recycle bin" in query):
             ws.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
-            speak("Recycle Bin Recycled")\
+            speak("Recycle Bin Recycled")
+            
 
         #For Not Listening to Alpha
         elif "don't listen" in query or "stop listening" in query:
             speak("for how much time you want to stop alpha from listening commands")
             a = int(takeCommand())
             time.sleep(a)
-            print(a)
+            
+            # print(a)
 
         #Locating Query
         elif "where is" in query:

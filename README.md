@@ -25,3 +25,4 @@ This Assistant can de mini tasks like:
 17. Playing a Song On Youtube
 18. Send a Whatsapp Message at Particular Time
 19. Find IP Address of System and location of your system
+20. Open any app of Your Choice

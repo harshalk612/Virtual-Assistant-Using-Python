@@ -1,10 +1,16 @@
-# ProjectAlpha
 
-A Personal Desktop Assistant named as ALPHA which can do various mini tasks just by giving voice commands using Python.
+# Virtual Assistant using Python
 
-Imported Modules which are used in this Project are : time, ctypes, pyttsx3, speech_recognition, datetime, wikipedia, webbrowser, os, smtplib, pyjokes, subprocess, winshell, ecapture,pywhatkit
+In this project, I developed a Virtual Personal Assistant named as Alpha which can do various types of tasks just by giving voice commands through Voice Commands.
 
-This Assistant can de mini tasks like:
+
+## Installation
+
+To run and work with my Project. you have to install specific modules by typing this command in Powershell:
+
+```bash
+  pip install -r requirements.txt
+```
 
 1. Searching Wikipedia
 2. Opening google, youtube, netflix, etc.

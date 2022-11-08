@@ -1,7 +1,7 @@
 
 # Virtual Assistant using Python
 
-In this project, I developed a Virtual Personal Assistant named as Alpha which can do various types of tasks just by giving voice commands through Voice Commands.
+In this project, I developed a Virtual Personal Assistant named as Alpha which can do various types of tasks just by giving voice commands through Microphone.
 
 
 ## Installation

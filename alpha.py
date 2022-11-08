@@ -235,7 +235,7 @@ def taskExecution():
             time_min = int(time_list[1])
             pywhatkit.sendwhatmsg(number,message=message,time_hour=time_hour,time_min=time_min)
 
-        # Sending Email Query only for harshal
+        # Sending Email Query only for my mail
         elif ("send email to harshal" in query) or ("send mail to harshal" in query):
             try:
 

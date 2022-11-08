@@ -12,6 +12,10 @@ To run and work with my Project. you have to install specific modules by typing 
   pip install -r requirements.txt
 ```
 
+## Appendix
+
+This project can do tasks which are specified as below:
+
 1. Searching Wikipedia
 2. Opening google, youtube, netflix, etc.
 3. Knowing the Local Time
